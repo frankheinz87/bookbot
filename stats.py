@@ -7,15 +7,11 @@ def get_num_chars (text):
     nocaps_text=text.lower()
     chars=list(nocaps_text) 
     dict={}
-    cnt_char=int
     for char in chars:
         if char not in dict:
-            cnt_char=1
-            dict[f"{char}"]=cnt_char
+            dict[char]=1
         else :
-            cnt_char=dict[f"{char}"]
-            cnt_char+=1
-            dict[f"{char}"]=cnt_char
+            dict[char]+=1
     return dict
 
 def get_report (dictionary):
@@ -23,8 +19,7 @@ def get_report (dictionary):
     for char in dictionary:
         char_dict ={}
         char_dict["char"]=char
-        char_dict["num"]=dictionary[f"{char}"]
+        char_dict["num"]=dictionary[char]
         unsorted_list.append(char_dict)
-    unsorted_list.sort(reverse=True, key=lambda k : k["num"])
-    sorted_list=unsorted_list
+    sorted_list = sorted(unsorted_list, key=lambda k: (-k["num"],k["char"]))
     return sorted_list
